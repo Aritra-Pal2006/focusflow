@@ -1,0 +1,202 @@
+/* Global styles for FocusFlow app */
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light theme */
+body.light {
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+/* Dark theme */
+body.dark {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+/* Main layout */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Responsive grid for main content */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Button styles */
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Light theme buttons */
+body.light .btn {
+  background-color: #4f46e5;
+  color: white;
+}
+
+body.light .btn-secondary {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+/* Dark theme buttons */
+body.dark .btn {
+  background-color: #6366f1;
+  color: white;
+}
+
+body.dark .btn-secondary {
+  background-color: #374151;
+  color: #f9fafb;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.light .navbar {
+  background-color: white;
+}
+
+body.dark .navbar {
+  background-color: #2d2d2d;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-photo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Timer component styles */
+.timer-container {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+body.light .timer-container {
+  background-color: white;
+}
+
+body.dark .timer-container {
+  background-color: #2d2d2d;
+}
+
+.timer-display {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  font-family: 'Courier New', monospace;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Task list styles */
+.task-list-container {
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body.light .task-list-container {
+  background-color: white;
+}
+
+body.dark .task-list-container {
+  background-color: #2d2d2d;
+}
+
+/* Stats styles */
+.stats-container {
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body.light .stats-container {
+  background-color: white;
+}
+
+body.dark .stats-container {
+  background-color: #2d2d2d;
+}
