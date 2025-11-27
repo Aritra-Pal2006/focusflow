@@ -1,18 +1,15 @@
 import React from 'react';
 import { useTheme } from '../context/ThemeContext';
-
 const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme();
-
+  const { currentTheme, toggleTheme } = useTheme();
   return (
     <button 
       className="btn btn-secondary"
       onClick={toggleTheme}
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
     >
-      {theme === 'light' ? '🌙' : '☀️'}
+      {currentTheme === 'light' ? '🌙 Dark' : '☀️ Light'}
     </button>
   );
 };
-
 export default ThemeToggle;

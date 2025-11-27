@@ -1,63 +1,61 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth, googleProvider } from '../firebase/firebaseConfig';
-import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-
+import { 
+  onAuthStateChanged, 
+  signInWithPopup, 
+  signOut as firebaseSignOut 
+} from 'firebase/auth';
 // Create the AuthContext
 const AuthContext = createContext();
-
 // Custom hook to use the AuthContext
 export const useAuth = () => {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 };
-
 // AuthProvider component to wrap the application
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
   // Listen for auth state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
     });
-
     // Cleanup subscription on unmount
     return unsubscribe;
   }, []);
-
-  // Login with Google
-  const loginWithGoogle = async () => {
+  // Sign in with Google
+  const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       setUser(result.user);
       return result.user;
     } catch (error) {
-      console.error('Error during Google login:', error);
+      console.error('Error during Google sign in:', error);
       throw error;
     }
   };
-
-  // Logout function
-  const logout = async () => {
+  // Sign out user
+  const signOutUser = async () => {
     try {
-      await signOut(auth);
+      await firebaseSignOut(auth);
       setUser(null);
     } catch (error) {
-      console.error('Error during logout:', error);
+      console.error('Error during sign out:', error);
       throw error;
     }
   };
-
   // Context value
   const value = {
     user,
     loading,
-    loginWithGoogle,
-    logout
+    signInWithGoogle,
+    signOutUser
   };
-
-  // Render children even while loading to avoid blank screen
   return (
     <AuthContext.Provider value={value}>
       {children}

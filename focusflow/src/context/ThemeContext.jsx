@@ -1,47 +1,44 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
 // Create the ThemeContext
 const ThemeContext = createContext();
-
 // Custom hook to use the ThemeContext
 export const useTheme = () => {
-  return useContext(ThemeContext);
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
 };
-
 // ThemeProvider component to wrap the application
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light');
-
+  const [currentTheme, setCurrentTheme] = useState('light');
   // Apply theme class to body and save to localStorage
   useEffect(() => {
     // Check for saved theme in localStorage
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem('focusflow-theme');
     if (savedTheme) {
-      setTheme(savedTheme);
+      setCurrentTheme(savedTheme);
     } else {
       // Check system preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(prefersDark ? 'dark' : 'light');
+      setCurrentTheme(prefersDark ? 'dark' : 'light');
     }
   }, []);
-
-  // Apply theme class to body element
+  // Apply theme class to root element
   useEffect(() => {
-    document.body.className = theme;
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
+    const root = document.documentElement;
+    root.className = `theme-${currentTheme}`;
+    localStorage.setItem('focusflow-theme', currentTheme);
+  }, [currentTheme]);
   // Toggle theme function
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    setCurrentTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
-
   // Context value
   const value = {
-    theme,
+    currentTheme,
     toggleTheme
   };
-
   return (
     <ThemeContext.Provider value={value}>
       {children}
