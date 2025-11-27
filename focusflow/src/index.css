@@ -18,9 +18,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  /* Default background to ensure we don't have a black screen */
-  background-color: #f5f7fa;
-  color: #333;
+  /* Let the theme handle the background color */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 #root {

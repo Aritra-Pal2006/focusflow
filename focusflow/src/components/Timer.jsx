@@ -36,7 +36,7 @@ const Timer = ({ onFocusComplete }) => {
       intervalRef.current = setInterval(() => {
         setRemainingSeconds(prev => {
           // If timer reaches zero
-          if (prev <= 1) {
+          if (prev <= 0) { // Fixed condition from prev <= 1 to prev <= 0
             // Clear the interval
             if (intervalRef.current) {
               clearInterval(intervalRef.current);
@@ -108,7 +108,7 @@ const Timer = ({ onFocusComplete }) => {
       <div className="timer-display">{formatTime(remainingSeconds)}</div>
       <div className="timer-controls">
         {!isRunning ? (
-          <button className="btn" onClick={handleStart} disabled={isRunning}>
+          <button className="btn" onClick={handleStart}>
             Start
           </button>
         ) : (
