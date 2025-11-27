@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Stats = () => {
+const Stats = ({ completedFocusSessions }) => {
   return (
     <div className="stats-container">
       <h2>Statistics</h2>
-      <p>Stats will go here</p>
+      <p>Completed focus sessions (this visit): {completedFocusSessions}</p>
     </div>
   );
 };
