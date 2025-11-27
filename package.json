@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "dev": "cd focusflow && npm run dev",
+    "build": "cd focusflow && npm run build",
+    "preview": "cd focusflow && npm run preview"
+  },
   "dependencies": {
     "firebase": "^12.6.0",
     "react-router-dom": "^7.9.6"
