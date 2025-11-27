@@ -1,8 +1,11 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggle from './ThemeToggle';
+import icon from '../assets/icon.png';
+
 const Navbar = () => {
   const { user, loading, signInWithGoogle, signOutUser } = useAuth();
+
   const handleLogin = async () => {
     try {
       await signInWithGoogle();
@@ -10,6 +13,7 @@ const Navbar = () => {
       console.error('Failed to log in with Google:', error);
     }
   };
+
   const handleLogout = async () => {
     try {
       await signOutUser();
@@ -17,9 +21,13 @@ const Navbar = () => {
       console.error('Failed to log out:', error);
     }
   };
+
   return (
     <nav className="navbar">
-      <div className="navbar-title">FocusFlow</div>
+      <div className="navbar-title">
+        <img src={icon} alt="FocusFlow Icon" className="navbar-icon" />
+        FocusFlow
+      </div>
       <div className="navbar-actions">
         <ThemeToggle />
         {loading ? (
@@ -40,4 +48,5 @@ const Navbar = () => {
     </nav>
   );
 };
+
 export default Navbar;
